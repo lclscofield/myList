@@ -1,14 +1,23 @@
 <script>
+import { mapActions } from 'vuex'
+
 export default {
+  methods: {
+    ...mapActions({
+      setLoginType: 'setLoginType'
+    })
+  },
   created () {
+    wx.hideTabBar()
+
     wx.getUserInfo({
-      lang: 'zh_CN',
-      success: function (res) {
+      success: res => {
         console.log(res)
+        wx.showTabBar()
+        this.setLoginType(true)
       },
-      fail: function (res) {
-        console.log(res)
-        wx.hideTabBar()
+      fail: () => {
+        this.setLoginType(false)
       }
     })
   }

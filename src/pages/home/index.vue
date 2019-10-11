@@ -1,16 +1,23 @@
 <template>
   <div class="home">
-    123
+    <div v-if="loginType">123</div>
+    <!-- 没登录就进入试用页 -->
+    <Probation v-else></Probation>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import Probation from '../../components/Probation'
+
 export default {
-  data () {
-    return {
-    }
+  components: {
+    Probation
   },
-  methods: {
+  computed: {
+    ...mapGetters({
+      loginType: 'getLoginType'
+    })
   }
 }
 </script>
