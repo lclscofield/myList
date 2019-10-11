@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/home/main",
-    "pages/user/main"
+    "pages/user/main",
+    "pages/list_edit/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

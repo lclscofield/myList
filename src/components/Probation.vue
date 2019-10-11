@@ -2,7 +2,7 @@
   <div class="probation">
     <image class="probation-list-img" mode="widthFix" src="/static/images/probation-list.png"></image>
     <div class="probation-desc">自律的人更自由！</div>
-    <mp-button btnClass="123123" type="primary" size="large">创建清单</mp-button>
+    <mp-button type="primary" size="large" @click="toListEdit">创建清单</mp-button>
   </div>
 </template>
 
@@ -10,10 +10,16 @@
 import mpButton from 'mpvue-weui/src/button'
 
 export default {
+  name: 'Probation',
   components: {
     mpButton
   },
   methods: {
+    toListEdit () {
+      wx.navigateTo({
+        url: '../list_edit/main?listType=probation'
+      })
+    }
   }
 }
 </script>
@@ -36,8 +42,9 @@ export default {
     margin-bottom: 60rpx;
   }
 
-  .probation-list-create {
-    // width: 60%;
+  /deep/ button {
+    width: 60%;
+    background-color: #70b7b7;
   }
 }
 </style>

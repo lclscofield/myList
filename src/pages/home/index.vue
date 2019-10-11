@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div v-if="loginType">123</div>
+    <List v-if="loginType"></List>
     <!-- 没登录就进入试用页 -->
     <Probation v-else></Probation>
   </div>
@@ -9,10 +9,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import Probation from '../../components/Probation'
+import List from '../../components/List'
 
 export default {
+  name: 'Home',
   components: {
-    Probation
+    Probation,
+    List
   },
   computed: {
     ...mapGetters({
