@@ -17,7 +17,7 @@ export default {
   methods: {
     toListEdit () {
       wx.navigateTo({
-        url: '../list_edit/main?listType=probation'
+        url: '../list_edit/main?editType=create&listType=probation'
       })
     }
   }
@@ -30,6 +30,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 32rpx;
 
   .probation-list-img {
     margin: 140rpx 0 60rpx;

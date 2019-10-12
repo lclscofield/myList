@@ -5,3 +5,7 @@ export function getLoginType (state) {
 export function getUserInfo (state) {
   return state.userInfo
 }
+
+export function getListConfig (state) {
+  return state.listConfig
+}

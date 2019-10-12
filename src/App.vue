@@ -7,7 +7,7 @@ export default {
       setLoginType: 'setLoginType'
     })
   },
-  created () {
+  onLaunch () {
     wx.hideTabBar()
 
     wx.getUserInfo({

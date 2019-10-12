@@ -7,3 +7,7 @@ export async function apiGetUserInfo ({ commit }, data) {
     username: 'xxx'
   })
 }
+
+export function setListConfig ({ commit }, data) {
+  commit('SET_LIST_CONFIG', data)
+}
