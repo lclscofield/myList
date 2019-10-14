@@ -22,3 +22,7 @@ export default {
   formatNumber,
   formatTime
 }
+
+export function copy (data) {
+  return JSON.parse(JSON.stringify(data))
+}

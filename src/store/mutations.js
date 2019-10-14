@@ -6,6 +6,10 @@ export function SET_USER_INFO (state, data) {
   state.userInfo = data
 }
 
+export function SET_LIST_DATA (state, data) {
+  state.listData = data
+}
+
 export function SET_LIST_CONFIG (state, data) {
   state.listConfig = data
 }
