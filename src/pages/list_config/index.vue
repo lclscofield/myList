@@ -5,7 +5,7 @@
       <switch :checked="listConfig.isEdit" color="#70b7b7" @change="changeIsEdit"></switch>
     </div>
     <div class="config-btn">
-      <mp-button type="warn" plain="true">删除</mp-button>
+      <mp-button type="warn" plain="true" :disabled="editType !== 'edit'" @click="deleteList">删除</mp-button>
       <mp-button type="default" plain="true" @click="resetListData">重置</mp-button>
     </div>
   </div>
@@ -22,7 +22,8 @@ export default {
   },
   data () {
     return {
-      isEdit: true
+      isEdit: true,
+      editType: 'edit'
     }
   },
   computed: {
@@ -30,13 +31,20 @@ export default {
       listConfig: 'getListConfig'
     })
   },
+  onLoad () {
+    Object.assign(this.$data, this.$options.data())
+
+    const { editType } = this.$root.$mp.query
+    this.editType = editType
+  },
   methods: {
     ...mapActions({
       resetListData: 'resetListData'
     }),
     changeIsEdit (e) {
       this.listConfig.isEdit = e.mp.detail.value
-    }
+    },
+    deleteList () { }
   }
 }
 </script>

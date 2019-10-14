@@ -20,11 +20,10 @@ export default {
   props: {
     createPerson: {
       type: String,
-      default: 'hahaha'
+      default: '...'
     },
     createTime: {
-      type: String,
-      default: ''
+      type: Number
     },
     editType: {
       type: String,
@@ -41,9 +40,8 @@ export default {
       showToast: false
     }
   },
-  created () {
-    this.createTime = new Date()
-    this.formatCreateTime = formatTime(this.createTime)
+  mounted () {
+    this.formatCreateTime = this.createTime ? formatTime(this.createTime) : '...'
   },
   methods: {
     emitTitle (val) {
@@ -51,7 +49,7 @@ export default {
     },
     toListConfig () {
       wx.navigateTo({
-        url: '../list_config/main'
+        url: '../list_config/main?editType=' + this.editType
       })
     }
   }
