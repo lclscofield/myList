@@ -28,3 +28,6 @@ export function resetListData ({ state }) {
 export function resetListConfig ({ state }) {
   state.listConfig = copy(listConfig)
 }
+
+// 登录
+export function login ({ state }) {}

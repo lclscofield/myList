@@ -1,9 +1,9 @@
 <template>
   <div class="list-edit">
-    <EditHeader :editType="editType" :createPerson="listData.createPerson" :createTime="listData.createTime"></EditHeader>
+    <EditHeader :editType="editType" :listType="listType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
 
     <div class="list-title">
-      <input placeholder="标题" :value="title" @input="changeTitle" />
+      <input placeholder="标题" :value="listData.title" @input="changeTitle" />
     </div>
 
     <EditText></EditText>
@@ -24,9 +24,7 @@ export default {
   },
   data () {
     return {
-      title: '', // 清单标题
-      editType: 'edit', // 编辑类型，edit：编辑、creat：创建
-      listType: 'normal' // 清单类型，normal：正常、probation：试用
+      editType: 'edit' // 编辑类型，edit：编辑、creat：创建
     }
   },
   // 页面加载
@@ -36,14 +34,11 @@ export default {
     wx.setNavigationBarTitle({
       title: '编辑清单'
     })
-    const { title, editType, listType } = this.$root.$mp.query
-    this.loadInit(this.title, title)
-    this.loadInit(this.editType, editType)
-    this.loadInit(this.listType, listType)
+    const { editType, ListId } = this.$root.$mp.query
+    this.editType = editType
 
-    if (listType === 'normal') {
-    } else if (listType === 'probation') {
-      this.editType = 'create'
+    if (editType === 'edit' && ListId) {
+      console.log('getList', ListId)
     }
   },
   // 页面卸载
@@ -64,12 +59,8 @@ export default {
       resetListData: 'resetListData',
       resetListConfig: 'resetListConfig'
     }),
-    // 加载初始化数据工具函数
-    loadInit (data, param) {
-      data = param || data
-    },
     changeTitle (e) {
-      this.title = e.mp.detail.value
+      this.listData.title = e.mp.detail.value
     }
   }
 }

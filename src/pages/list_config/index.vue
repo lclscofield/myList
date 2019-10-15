@@ -1,7 +1,11 @@
 <template>
   <div class="list-config">
-    <div class="config-isedit">
-      <div class="config-isedit-text">是否可编辑</div>
+    <div class="config-open">
+      <div class="config-open-title">他人可分享</div>
+      <switch :checked="listConfig.isShare" color="#70b7b7" @change="changeIsShare"></switch>
+    </div>
+    <div class="config-open">
+      <div class="config-open-title">他人可编辑</div>
       <switch :checked="listConfig.isEdit" color="#70b7b7" @change="changeIsEdit"></switch>
     </div>
     <div class="config-btn">
@@ -22,7 +26,6 @@ export default {
   },
   data () {
     return {
-      isEdit: true,
       editType: 'edit'
     }
   },
@@ -41,6 +44,9 @@ export default {
     ...mapActions({
       resetListData: 'resetListData'
     }),
+    changeIsShare (e) {
+      this.listConfig.isShare = e.mp.detail.value
+    },
     changeIsEdit (e) {
       this.listConfig.isEdit = e.mp.detail.value
     },
@@ -55,12 +61,12 @@ export default {
   color: #1d1d1d;
   padding: 40rpx 40rpx 20rpx;
 
-  > .config-isedit {
+  > .config-open {
     display: flex;
     justify-content: space-between;
     padding-bottom: 40rpx;
 
-    > .config-isedit-text {
+    > .config-open-title {
       color: #6d7575;
     }
   }

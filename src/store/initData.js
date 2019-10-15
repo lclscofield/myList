@@ -5,5 +5,6 @@ export const listData = {
 
 // 当前清单配置
 export const listConfig = {
-  isEdit: true // 是否能编辑
+  isShare: false, // 他人是否可分享
+  isEdit: true // 他人是否可编辑
 }

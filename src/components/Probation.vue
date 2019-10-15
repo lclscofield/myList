@@ -2,12 +2,14 @@
   <div class="probation">
     <image class="probation-list-img" mode="widthFix" src="/static/images/probation-list.png"></image>
     <div class="probation-desc">自律的人更自由！</div>
-    <mp-button type="primary" size="large" @click="toListEdit">创建清单</mp-button>
+    <mp-button type="default" size="large" @click="toListEdit">创建清单</mp-button>
+    <mp-button type="primary" size="large" lang="zh-CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</mp-button>
   </div>
 </template>
 
 <script>
 import mpButton from 'mpvue-weui/src/button'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Probation',
@@ -15,10 +17,18 @@ export default {
     mpButton
   },
   methods: {
+    ...mapActions({
+      login: 'login'
+    }),
     toListEdit () {
       wx.navigateTo({
-        url: '../list_edit/main?editType=create&listType=probation'
+        url: '../list_edit/main?editType=create'
       })
+    },
+    loginHandler (e) {
+      if (e.mp.detail.userInfo) {
+        this.login()
+      }
     }
   }
 }
@@ -45,6 +55,8 @@ export default {
 
   /deep/ button {
     width: 60%;
+  }
+  /deep/ button[type="primary"] {
     background-color: #70b7b7;
   }
 }
