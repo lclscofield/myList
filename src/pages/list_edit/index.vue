@@ -1,12 +1,12 @@
 <template>
   <div class="list-edit">
-    <EditHeader :editType="editType" :listType="listType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
+    <EditHeader :editType="editType" :isEdit="isEdit" :isShare="isShare" :createUserName="listData.createUserName" :createTime="listData.createTime" @changeIsEdit="changeIsEdit"></EditHeader>
 
     <div class="list-title">
-      <input placeholder="标题" :value="listData.title" @input="changeTitle" />
+      <input placeholder="标题" :value="listData.title" :disabled="!isEdit" @input="changeTitle" />
     </div>
 
-    <EditText></EditText>
+    <EditText :disabled="!isEdit"></EditText>
   </div>
 </template>
 
@@ -24,22 +24,32 @@ export default {
   },
   data () {
     return {
-      editType: 'edit' // 编辑类型，edit：编辑、creat：创建
+      editType: 'edit', // 编辑类型，edit：编辑、creat：创建
+      isEdit: false, // 是否编辑状态
+      isShare: false // 是否分享清单状态
     }
   },
   // 页面加载
   onLoad () {
     Object.assign(this.$data, this.$options.data())
+    const { title, editType, isShare, ListId } = this.$root.$mp.query
+    this.editType = editType
+    this.isShare = isShare || false
+
+    let navigationBarTitle = ''
+    if (editType === 'create') {
+      this.isEdit = true
+      navigationBarTitle = '编辑清单'
+    } else if (editType === 'edit') {
+      navigationBarTitle = title || ''
+      if (ListId) {
+        console.log('getList', ListId)
+      }
+    }
     // 设置导航栏 title
     wx.setNavigationBarTitle({
-      title: '编辑清单'
+      title: navigationBarTitle
     })
-    const { editType, ListId } = this.$root.$mp.query
-    this.editType = editType
-
-    if (editType === 'edit' && ListId) {
-      console.log('getList', ListId)
-    }
   },
   // 页面卸载
   onUnload () {
@@ -61,6 +71,10 @@ export default {
     }),
     changeTitle (e) {
       this.listData.title = e.mp.detail.value
+    },
+    // 改变编辑状态
+    changeIsEdit () {
+      this.isEdit = !this.isEdit
     }
   }
 }

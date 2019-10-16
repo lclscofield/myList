@@ -30,9 +30,13 @@ export default {
       type: String,
       default: 'edit'
     },
-    listType: {
-      type: String,
-      default: 'normal'
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    isShare: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -55,7 +59,12 @@ export default {
       listConfig: 'getListConfig',
       loginType: 'getLoginType',
       userInfo: 'getUserInfo'
-    })
+    }),
+    // 是否有清单权限
+    isAdmin () {
+      // 不是分享状态并且未登录（试用），或者，已登陆并且本人就是创建者
+      return (!this.isShare && !this.loginType) || (this.loginType && this.userInfo.id === this.listData.createUserId)
+    }
   },
   methods: {
     // 提示弹窗
@@ -72,12 +81,7 @@ export default {
     },
     // 跳转清单配置页
     toListConfig () {
-      let isAdmin = false
-      // 试用，或者，已登陆并且本人就是创建者
-      if (this.listType === 'probation' || (this.loginType && this.userInfo.id === this.listData.createUserId)) {
-        isAdmin = true
-      }
-      if (isAdmin) {
+      if (this.isAdmin) {
         wx.navigateTo({
           url: '../list_config/main?editType=' + this.editType
         })
@@ -87,8 +91,9 @@ export default {
     },
     // 显示 ActionSheet
     showActionSheet () {
+      const itemList = this.isEdit ? ['分享', '预览'] : ['分享', '编辑']
       wx.showActionSheet({
-        itemList: ['分享', '编辑'],
+        itemList: itemList,
         itemColor: '#70b7b7',
         success: res => {
           const idx = res.tapIndex
@@ -105,7 +110,9 @@ export default {
 
     },
     // 编辑处理
-    editHandler () { }
+    editHandler () {
+      this.$emit('changeIsEdit')
+    }
   }
 }
 </script>

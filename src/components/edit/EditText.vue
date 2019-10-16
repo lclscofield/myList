@@ -2,7 +2,7 @@
   <div class="edit-text">
     <div class="edit-text-content" v-for="(item, idx) in listData.textContent" :key="idx + item">
       <div class="content-index">{{ idx + 1 }}、</div>
-      <textarea class="content" :value="item" auto-height placeholder="请输入清单内容" @input="changeContent($event, idx)" />
+      <textarea class="content" :value="item" :disabled="disabled" auto-height placeholder="请输入清单内容" @input="changeContent($event, idx)" />
       <i class="iconfont icon-addition" v-if="idx === listData.textContent.length - 1" @click="addText"></i>
       <i class="iconfont icon-delete" v-else @click="deleteText(idx)"></i>
       </div>
@@ -14,6 +14,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'EditText',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {
     ...mapGetters({
       listData: 'getListData'
