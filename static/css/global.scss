@@ -1,0 +1,47 @@
+button {
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 30rpx;
+  font-size: 32rpx;
+
+  &.btn-normal {
+    height: 88rpx;
+    line-height: 88rpx;
+  padding: 0 30rpx;
+  font-size: 32rpx;
+  }
+
+  &.btn-small {
+    height: 60rpx;
+    padding: 0 16rpx;
+    min-width: 120rpx;
+    font-size: 24rpx;
+    line-height: 60rpx;
+  }
+
+  &.btn-mini {
+    height: 44rpx;
+    line-height: 44rpx;
+    font-size: 20rpx;
+  }
+
+  &[type="primary"] {
+    background-color: #70b7b7;
+
+    &[plain] {
+      color: #70b7b7;
+      border-color: #70b7b7;
+      background-color: transparent;
+    }
+  }
+
+  &.button-hover {
+    &[type="primary"] {
+      background-color: #66a5a5;
+
+      &[plain] {
+        background-color: #e3e3e3;
+      }
+    }
+  }
+}

@@ -1,20 +1,18 @@
 <template>
   <div class="edit-header">
-    <div class="create-info" @click="showTip('name')">
+    <div class="create-info" @click="showToast = true">
       <div class="create-person-wrap">创建者:<span class="create-person">{{ createUserName }}</span></div>
       <div class="create-time-wrap">by:<span class="create-time">{{ formatCreateTime }}</span></div>
     </div>
-    <i class="iconfont icon-other" @click="showActionSheet"></i>
-    <i class="iconfont icon-setup" @click="toListConfig"></i>
+    <i class="iconfont icon-setup" v-if="showConfig" @click="toListConfig"></i>
 
-    <mp-toast v-model="showToast" :type="toastType" :content="toastContent"></mp-toast>
+    <mp-toast v-model="showToast" :content="createUserName"></mp-toast>
   </div>
 </template>
 
 <script>
 import mpToast from 'mpvue-weui/src/toast'
 import { formatTime } from '../../utils'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'EditHeader',
@@ -29,14 +27,6 @@ export default {
     editType: {
       type: String,
       default: 'edit'
-    },
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    isShare: {
-      type: Boolean,
-      default: false
     }
   },
   components: {
@@ -44,74 +34,20 @@ export default {
   },
   data () {
     return {
+      showConfig: false,
       formatCreateTime: '',
-      showToast: false,
-      toastContent: '',
-      toastType: ''
+      showToast: false
     }
   },
   mounted () {
     this.formatCreateTime = this.createTime ? formatTime(this.createTime) : '...'
   },
-  computed: {
-    ...mapGetters({
-      listData: 'getListData',
-      listConfig: 'getListConfig',
-      loginType: 'getLoginType',
-      userInfo: 'getUserInfo'
-    }),
-    // 是否有清单权限
-    isAdmin () {
-      // 不是分享状态并且未登录（试用），或者，已登陆并且本人就是创建者
-      return (!this.isShare && !this.loginType) || (this.loginType && this.userInfo.id === this.listData.createUserId)
-    }
-  },
   methods: {
-    // 提示弹窗
-    showTip (tipType) {
-      if (tipType === 'name') {
-        this.toastContent = this.createUserName
-        this.toastType = ''
-        this.showToast = true
-      } else if (tipType === 'no') {
-        this.toastContent = '没有权限!'
-        this.toastType = 'warn'
-        this.showToast = true
-      }
-    },
     // 跳转清单配置页
     toListConfig () {
-      if (this.isAdmin) {
-        wx.navigateTo({
-          url: '../list_config/main?editType=' + this.editType
-        })
-      } else {
-        this.showTip('no')
-      }
-    },
-    // 显示 ActionSheet
-    showActionSheet () {
-      const itemList = this.isEdit ? ['分享', '预览'] : ['分享', '编辑']
-      wx.showActionSheet({
-        itemList: itemList,
-        itemColor: '#70b7b7',
-        success: res => {
-          const idx = res.tapIndex
-          if (idx === 0) {
-            this.shareHandler()
-          } else if (idx === 1) {
-            this.editHandler()
-          }
-        }
+      wx.navigateTo({
+        url: '../list_config/main?editType=' + this.editType
       })
-    },
-    // 分享处理
-    shareHandler () {
-
-    },
-    // 编辑处理
-    editHandler () {
-      this.$emit('changeIsEdit')
     }
   }
 }
@@ -141,7 +77,7 @@ export default {
         font-size: 36rpx;
         color: #1d1d1d;
         padding-left: 10rpx;
-        max-width: 220rpx;
+        max-width: 260rpx;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -160,7 +96,7 @@ export default {
   }
 
   > .icon-setup {
-    font-size: 36rpx;
+    font-size: 40rpx;
   }
 }
 </style>

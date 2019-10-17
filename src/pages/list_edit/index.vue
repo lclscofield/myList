@@ -1,17 +1,20 @@
 <template>
   <div class="list-edit">
-    <EditHeader :editType="editType" :isEdit="isEdit" :isShare="isShare" :createUserName="listData.createUserName" :createTime="listData.createTime" @changeIsEdit="changeIsEdit"></EditHeader>
+    <EditHeader :editType="editType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
 
     <div class="list-title">
       <input placeholder="标题" :value="listData.title" :disabled="!isEdit" @input="changeTitle" />
     </div>
 
     <EditText :disabled="!isEdit"></EditText>
+
+    <EditFooter :editType="editType" :isEdit="isEdit" @changeIsEdit="changeIsEdit"></EditFooter>
   </div>
 </template>
 
 <script>
 import EditHeader from '../../components/edit/EditHeader'
+import EditFooter from '../../components/edit/EditFooter'
 import EditText from '../../components/edit/EditText'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -20,6 +23,7 @@ export default {
   name: 'ListEdit',
   components: {
     EditHeader,
+    EditFooter,
     EditText
   },
   data () {
@@ -39,7 +43,7 @@ export default {
     let navigationBarTitle = ''
     if (editType === 'create') {
       this.isEdit = true
-      navigationBarTitle = '编辑清单'
+      navigationBarTitle = '创建清单'
     } else if (editType === 'edit') {
       navigationBarTitle = title || ''
       if (ListId) {
@@ -57,6 +61,10 @@ export default {
     this.resetListData()
     this.resetListConfig()
   },
+  // 转发
+  onShareAppMessage () {
+    return {}
+  },
   computed: {
     ...mapGetters({
       listData: 'getListData',
@@ -65,10 +73,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      setListConfig: 'setListConfig',
       resetListData: 'resetListData',
       resetListConfig: 'resetListConfig'
     }),
+    // 改变标题
     changeTitle (e) {
       this.listData.title = e.mp.detail.value
     },

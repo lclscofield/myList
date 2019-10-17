@@ -60,7 +60,7 @@ export default {
     }
 
     > .iconfont {
-      font-size: 38rpx;
+      font-size: 40rpx;
       line-height: 40rpx;
 
       &.icon-delete {
