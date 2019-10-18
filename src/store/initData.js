@@ -1,6 +1,11 @@
 // 当前清单数据
 export const listData = {
-  textContent: [''] // 文字内容
+  textContent: [
+    {
+      text: '',
+      imgs: []
+    }
+  ] // 内容
 }
 
 // 当前清单配置

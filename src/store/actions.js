@@ -30,4 +30,7 @@ export function resetListConfig ({ state }) {
 }
 
 // 登录
-export function login ({ state }) {}
+export function login ({ state }) {
+  state.loginType = true
+  wx.showTabBar()
+}

@@ -13,7 +13,6 @@ export default {
     wx.getUserInfo({
       success: res => {
         console.log(res)
-        // wx.showTabBar()
         this.login()
       }
     })

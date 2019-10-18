@@ -2,11 +2,11 @@
   <div class="list-edit">
     <EditHeader :editType="editType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
 
-    <div class="list-title">
+    <div class="list-title" :class="{ 'is-disabled': !isEdit }">
       <input placeholder="标题" :value="listData.title" :disabled="!isEdit" @input="changeTitle" />
     </div>
 
-    <EditText :disabled="!isEdit"></EditText>
+    <EditContent :disabled="!isEdit"></EditContent>
 
     <EditFooter :editType="editType" :isEdit="isEdit" @changeIsEdit="changeIsEdit"></EditFooter>
   </div>
@@ -15,7 +15,7 @@
 <script>
 import EditHeader from '../../components/edit/EditHeader'
 import EditFooter from '../../components/edit/EditFooter'
-import EditText from '../../components/edit/EditText'
+import EditContent from '../../components/edit/EditContent'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -24,7 +24,7 @@ export default {
   components: {
     EditHeader,
     EditFooter,
-    EditText
+    EditContent
   },
   data () {
     return {
@@ -94,10 +94,15 @@ export default {
   color: #1d1d1d;
 
   > .list-title {
+    box-sizing: border-box;
     border-bottom: 2rpx solid #b7c5c5;
     margin: 20rpx 40rpx;
     padding: 20rpx 0;
     font-size: 36rpx;
+    &.is-disabled {
+      border: none;
+      text-align: center;
+    }
   }
 }
 </style>
