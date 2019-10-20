@@ -1,5 +1,6 @@
 import { listData, listConfig } from './initData'
 import { copy } from '../utils'
+import * as api from '../api'
 
 export function setLoginType ({ commit }, data) {
   commit('SET_LOGIN_TYPE', data)
@@ -30,7 +31,10 @@ export function resetListConfig ({ state }) {
 }
 
 // 登录
-export function login ({ state }) {
-  state.loginType = true
-  wx.showTabBar()
+export async function login ({ state }, userInfo) {
+  const res = await api.login(userInfo)
+  if (res.result) {
+    state.loginType = true
+    wx.showTabBar()
+  }
 }

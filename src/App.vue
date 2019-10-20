@@ -8,12 +8,18 @@ export default {
     })
   },
   onLaunch () {
+    wx.cloud.init({
+      env: 'list-dev-xoqoz',
+      traceUser: true
+    })
+
     wx.hideTabBar()
 
     wx.getUserInfo({
+      lang: 'zh_CN',
       success: res => {
         console.log(res)
-        this.login()
+        this.login(res.userInfo)
       }
     })
   }

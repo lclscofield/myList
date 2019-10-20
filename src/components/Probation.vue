@@ -3,7 +3,7 @@
     <image class="probation-list-img" mode="widthFix" src="/static/images/probation-list.png"></image>
     <div class="probation-desc">自律的人更自由！</div>
     <button class="btn" type="default" size="large" @click="toListEdit">创建清单</button>
-    <button class="btn btn-login" type="primary" size="large" lang="zh-CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
+    <button class="btn btn-login" type="primary" size="large" lang="zh_CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
   </div>
 </template>
 
@@ -22,8 +22,9 @@ export default {
       })
     },
     loginHandler (e) {
-      if (e.mp.detail.userInfo) {
-        this.login()
+      const userInfo = e.mp.detail.userInfo
+      if (userInfo) {
+        this.login(userInfo)
       }
     }
   }
