@@ -1,11 +1,11 @@
 <template>
   <div class="edit-content-wrap">
     <div class="edit-content" :class="{ 'add-animation': idx === listData.textContent.length }" v-for="(item, idx) in listData.textContent" :key="idx + item.text">
-      <div class="content-index">{{ idx + 10 }}、</div>
+      <div class="content-index">{{ idx + 1 }}、</div>
       <div class="content">
-        <textarea class="content-text" :value="item.text" :disabled="disabled" auto-height placeholder="请输入清单内容" @input="changeText($event, idx)" />
+        <textarea class="content-text" :class="{ 'is-disabled': disabled }" :value="item.text" :disabled="disabled" auto-height :placeholder="disabled ? '' : '请输入清单内容'" @input="changeText($event, idx)" />
         <div class="content-imgs" v-if="item.imgs && item.imgs.length">
-          <image class="content-img" mode="aspectFit" v-for="(img, imgIdx) in item.imgs" :key="imgIdx + img" :src="img"></image>
+          <image class="content-img" mode="aspectFit" v-for="(img, imgIdx) in item.imgs" :key="imgIdx + img" :src="img" @click="previewImage(img)"></image>
         </div>
         </div>
       <div class="icon-wrap" v-if="!disabled">
@@ -56,6 +56,19 @@ export default {
           item.imgs.push(...res.tempFilePaths)
         }
       })
+    },
+    // 预览图片
+    previewImage (img) {
+      let imgs = []
+      this.listData.textContent.forEach(item => {
+        if (item.imgs && item.imgs.length) {
+          imgs = imgs.concat(item.imgs)
+        }
+      })
+      wx.previewImage({
+        urls: imgs,
+        current: img
+      })
     }
   }
 }
@@ -99,6 +112,10 @@ export default {
         background-color: #e9f1f1;
         border-radius: 4rpx;
         line-height: 1.3;
+
+        &.is-disabled {
+          background-color: transparent;
+        }
       }
 
       > .content-imgs {

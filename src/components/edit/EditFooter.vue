@@ -1,12 +1,12 @@
 <template>
-  <cover-view class="edit-footer">
+  <div class="edit-footer">
     <div class="footer-btn">
       <button class="btn" type="primary" plain="true" :disabled="!isAdmin" hover-start-time="20" hover-stay-time="70" open-type="share">分享</button>
       <button v-if="loginType" class="btn" type="primary" :disabled="!isAdmin" hover-start-time="20" hover-stay-time="70" @click="saveList">保存</button>
       <button v-else class="btn" type="primary" hover-start-time="20" hover-stay-time="70" lang="zh-CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
     </div>
     <i class="iconfont icon-other" @click="showActionSheet"></i>
-  </cover-view>
+  </div>
 </template>
 
 <script>
@@ -106,11 +106,8 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding: 40rpx 40rpx 60rpx;
-  left: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
-  z-index: 1000;
   background-color: #ffffff;
   box-shadow: 0 -2rpx 2rpx 2rpx #e9f1f1;
 

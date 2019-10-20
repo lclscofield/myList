@@ -1,12 +1,14 @@
 <template>
-  <div class="list-edit">
-    <EditHeader :editType="editType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
+  <div class="list-edit-wrap">
+    <scroll-view class="list-edit" scroll-y="true">
+      <EditHeader :editType="editType" :createUserName="listData.createUserName" :createTime="listData.createTime"></EditHeader>
 
-    <div class="list-title" :class="{ 'is-disabled': !isEdit }">
-      <input placeholder="标题" :value="listData.title" :disabled="!isEdit" @input="changeTitle" />
-    </div>
+      <div class="list-title" :class="{ 'is-disabled': !isEdit }">
+        <input placeholder="标题" maxlength="12" :value="listData.title" :disabled="!isEdit" @input="changeTitle" />
+      </div>
 
-    <EditContent :disabled="!isEdit"></EditContent>
+      <EditContent :disabled="!isEdit"></EditContent>
+    </scroll-view>
 
     <EditFooter :editType="editType" :isEdit="isEdit" @changeIsEdit="changeIsEdit"></EditFooter>
   </div>
@@ -89,19 +91,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list-edit {
+.list-edit-wrap {
   font-size: 32rpx;
   color: #1d1d1d;
+  height: 100vh;
 
-  > .list-title {
-    box-sizing: border-box;
-    border-bottom: 2rpx solid #b7c5c5;
-    margin: 20rpx 40rpx;
-    padding: 20rpx 0;
-    font-size: 36rpx;
-    &.is-disabled {
-      border: none;
-      text-align: center;
+  > .list-edit {
+    height: calc(100vh - 188rpx);
+
+    .list-title {
+      border-bottom: 2rpx solid #b7c5c5;
+      margin: 20rpx 40rpx;
+      padding: 20rpx 0;
+      font-size: 36rpx;
+      &.is-disabled {
+        border-color: transparent;
+        text-align: center;
+      }
     }
   }
 }
