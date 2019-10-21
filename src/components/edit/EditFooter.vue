@@ -35,7 +35,7 @@ export default {
     // 是否有权限
     isAdmin () {
       // 只有创建者有此权限
-      return this.loginType && this.editType === 'edit' && this.userInfo.id === this.listData.createUserId
+      return (this.loginType && this.editType === 'edit' && this.userInfo.id === this.listData.createUserId) || (this.loginType && this.editType === 'create')
     }
   },
   watch: {
