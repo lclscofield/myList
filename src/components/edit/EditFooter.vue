@@ -2,7 +2,7 @@
   <div class="edit-footer">
     <div class="footer-btn">
       <button class="btn" type="primary" plain="true" :disabled="!isAdmin" hover-start-time="20" hover-stay-time="70" open-type="share">分享</button>
-      <button v-if="loginType" class="btn" type="primary" :disabled="!isAdmin" hover-start-time="20" hover-stay-time="70" @click="saveList">保存</button>
+      <button v-if="loginType" class="btn" type="primary" :disabled="!(isAdmin || editType === 'create')" hover-start-time="20" hover-stay-time="70" @click="saveHandler">保存</button>
       <button v-else class="btn" type="primary" hover-start-time="20" hover-stay-time="70" lang="zh_CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
     </div>
     <i class="iconfont icon-other" @click="showActionSheet"></i>
@@ -35,27 +35,22 @@ export default {
     // 是否有权限
     isAdmin () {
       // 只有创建者有此权限
-      return (this.loginType && this.editType === 'edit' && this.userInfo.id === this.listData.createUserId) || (this.loginType && this.editType === 'create')
-    }
-  },
-  watch: {
-    isAdmin (val) {
-      !val && wx.hideShareMenu()
+      return this.loginType && this.editType === 'edit' && this.userInfo.id === this.listData.createUserId
     }
   },
   mounted () {
-    if (!this.isAdmin) {
-      wx.hideShareMenu()
-    }
+    wx.hideShareMenu()
   },
   methods: {
     ...mapActions({
       resetListData: 'resetListData',
-      login: 'login'
+      login: 'login',
+      saveList: 'saveList',
+      deleteList: 'deleteList'
     }),
     // 保存
-    saveList () {
-      if (this.isAdmin) {
+    saveHandler () {
+      if (this.isAdmin || this.editType === 'create') {
       }
     },
     // 显示 ActionSheet
@@ -79,14 +74,14 @@ export default {
     editHandler () {
       if (this.isAdmin || this.isProbation) {
         this.$emit('changeIsEdit')
+      } else {
+        wx.showToast({
+          title: '暂无权限'
+        })
       }
     },
     // 删除处理
     deleteHandler () {
-      wx.showToast({
-        title: 'xxxx',
-        icon: 'success'
-      })
     },
     // 登录
     loginHandler (e) {

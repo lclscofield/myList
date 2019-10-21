@@ -65,7 +65,11 @@ export default {
   },
   // 转发
   onShareAppMessage () {
-    return {}
+    const title = this.listData.title || ''
+    return {
+      title,
+      path: `../list_edit/main?editType=edit&title=${title}&isShare=true&ListId=${this.listData._id}`
+    }
   },
   computed: {
     ...mapGetters({

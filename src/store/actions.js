@@ -38,3 +38,9 @@ export async function login ({ state }, userInfo) {
     wx.showTabBar()
   }
 }
+
+// 保存清单
+export async function saveList ({ state }) {}
+
+// 删除清单
+export async function deleteList ({ state }) {}
