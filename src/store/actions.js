@@ -20,6 +20,10 @@ export function setListConfig ({ commit }, data) {
   commit('SET_LIST_CONFIG', data)
 }
 
+export function setLoading ({ commit }, data) {
+  commit('SET_LOADING', data)
+}
+
 // 重置清单数据
 export function resetListData ({ state }) {
   state.listData = copy(listData)
@@ -33,6 +37,8 @@ export function resetListConfig ({ state }) {
 // 登录
 export async function login ({ state }, userInfo) {
   const res = await api.login(userInfo)
+  setLoading(false)
+  wx.hideLoading()
   if (res.result) {
     state.loginType = true
     wx.showTabBar()

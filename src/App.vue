@@ -4,7 +4,8 @@ import { mapActions } from 'vuex'
 export default {
   methods: {
     ...mapActions({
-      login: 'login'
+      login: 'login',
+      setLoading: 'setLoading'
     })
   },
   onLaunch () {
@@ -14,12 +15,19 @@ export default {
     })
 
     wx.hideTabBar()
+    this.setLoading(true)
+    wx.showLoading({
+      title: '加载中...'
+    })
 
     wx.getUserInfo({
       lang: 'zh_CN',
       success: res => {
-        console.log(res)
         this.login(res.userInfo)
+      },
+      fail: res => {
+        this.setLoading(false)
+        wx.hideLoading()
       }
     })
   }

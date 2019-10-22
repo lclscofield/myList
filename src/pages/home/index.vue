@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <List v-if="loginType"></List>
+    <List v-if="loginType && !loading"></List>
     <!-- 没登录就进入试用页 -->
     <Probation v-else></Probation>
   </div>
@@ -19,7 +19,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loginType: 'getLoginType'
+      loginType: 'getLoginType',
+      loading: 'getLoading'
     })
   }
 }
