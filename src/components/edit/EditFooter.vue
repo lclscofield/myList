@@ -38,9 +38,6 @@ export default {
       return this.loginType && this.editType === 'edit' && this.userInfo.id === this.listData.createUserId
     }
   },
-  mounted () {
-    wx.hideShareMenu()
-  },
   methods: {
     ...mapActions({
       resetListData: 'resetListData',

@@ -6,22 +6,12 @@ export function setLoginType ({ commit }, data) {
   commit('SET_LOGIN_TYPE', data)
 }
 
-export async function apiGetUserInfo ({ commit }, data) {
-  commit('SET_USER_INFO', {
-    username: 'xxx'
-  })
-}
-
 export function setListData ({ commit }, data) {
   commit('SET_LIST_DATA', data)
 }
 
 export function setListConfig ({ commit }, data) {
   commit('SET_LIST_CONFIG', data)
-}
-
-export function setLoading ({ commit }, data) {
-  commit('SET_LOADING', data)
 }
 
 // 重置清单数据
@@ -35,13 +25,15 @@ export function resetListConfig ({ state }) {
 }
 
 // 登录
-export async function login ({ state }, userInfo) {
+export async function login ({ state, commit }, userInfo) {
   const res = await api.login(userInfo)
-  setLoading(false)
-  wx.hideLoading()
+
   if (res.result) {
     state.loginType = true
-    wx.showTabBar()
+    commit('SET_USER_INFO', res.result)
+    return res.result
+  } else {
+    return false
   }
 }
 

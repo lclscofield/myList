@@ -38,6 +38,8 @@ export default {
   // 页面加载
   onLoad () {
     Object.assign(this.$data, this.$options.data())
+    wx.hideShareMenu()
+
     const { title, editType, isShare, ListId } = this.$root.$mp.query
     this.editType = editType
     this.isShare = isShare || false

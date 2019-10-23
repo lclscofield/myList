@@ -13,7 +13,3 @@ export function getListData (state) {
 export function getListConfig (state) {
   return state.listConfig
 }
-
-export function getLoading (state) {
-  return state.loading
-}

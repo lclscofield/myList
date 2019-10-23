@@ -8,10 +8,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Probation',
+
+  onShow () {
+    if (this.loginType) {
+      wx.switchTab({
+        url: '../home/main'
+      })
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      loginType: 'getLoginType'
+    })
+  },
+
   methods: {
     ...mapActions({
       login: 'login'
@@ -21,10 +36,16 @@ export default {
         url: '../list_edit/main?editType=create'
       })
     },
-    loginHandler (e) {
+    async loginHandler (e) {
       const userInfo = e.mp.detail.userInfo
       if (userInfo) {
-        this.login(userInfo)
+        const res = await this.login(userInfo)
+        // 登录成功进入首页
+        if (res) {
+          wx.switchTab({
+            url: '../home/main'
+          })
+        }
       }
     }
   }
@@ -38,6 +59,7 @@ export default {
   flex-direction: column;
   align-items: center;
   font-size: 32rpx;
+  animation: fade-in 0.3s linear;
 
   .probation-list-img {
     margin: 140rpx 0 60rpx;

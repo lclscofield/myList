@@ -13,7 +13,3 @@ export function SET_LIST_DATA (state, data) {
 export function SET_LIST_CONFIG (state, data) {
   state.listConfig = data
 }
-
-export function SET_LOADING (state, data) {
-  state.loading = data
-}

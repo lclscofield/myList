@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/launch/main",
+    "pages/probation/main",
     "pages/home/main",
     "pages/user/main",
     "pages/list_edit/main",

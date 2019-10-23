@@ -80,21 +80,10 @@ export default {
   color: #1d1d1d;
   padding: 0 20rpx;
 
-  // 动画
-  // content 淡入
-  @keyframes content {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   > .edit-content {
     position: relative;
     padding: 20rpx 0 20rpx;
-    animation: content 0.3s linear;
+    animation: fade-in 0.3s linear;
 
     > .content-index {
       position: absolute;
