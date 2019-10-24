@@ -81,10 +81,25 @@ export default {
     deleteHandler () {
     },
     // 登录
-    loginHandler (e) {
+    async loginHandler (e) {
       const userInfo = e.mp.detail.userInfo
       if (userInfo) {
-        this.login(userInfo)
+        wx.showLoading({
+          title: '登录中...',
+          mask: true
+        })
+        const res = await this.login(userInfo)
+        if (res) {
+          wx.hideLoading()
+          wx.showToast({
+            title: '登录成功'
+          })
+        } else {
+          wx.showToast({
+            title: '登录失败，请重试',
+            icon: 'none'
+          })
+        }
       }
     }
   }

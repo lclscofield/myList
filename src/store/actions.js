@@ -32,8 +32,6 @@ export async function login ({ state, commit }, userInfo) {
     state.loginType = true
     commit('SET_USER_INFO', res.result)
     return res.result
-  } else {
-    return false
   }
 }
 

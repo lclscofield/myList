@@ -39,11 +39,25 @@ export default {
     async loginHandler (e) {
       const userInfo = e.mp.detail.userInfo
       if (userInfo) {
+        wx.showLoading({
+          title: '登录中...',
+          mask: true
+        })
         const res = await this.login(userInfo)
         // 登录成功进入首页
         if (res) {
+          wx.hideLoading()
+          wx.showToast({
+            title: '登录成功'
+          })
           wx.switchTab({
             url: '../home/main'
+          })
+        } else {
+          wx.hideLoading()
+          wx.showToast({
+            title: '登录失败，请重试',
+            icon: 'none'
           })
         }
       }
