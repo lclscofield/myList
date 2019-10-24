@@ -1,17 +1,15 @@
 <template>
   <div class="edit-header">
-    <div class="create-info" @click="showToast = true">
+    <div class="create-info" @click="showCreateUserName">
       <div class="create-person-wrap">创建者:<span class="create-person">{{ createUserName }}</span></div>
       <div class="create-time-wrap">by:<span class="create-time">{{ formatCreateTime }}</span></div>
     </div>
     <i class="iconfont icon-setup" v-if="showConfig" @click="toListConfig"></i>
 
-    <mp-toast v-model="showToast" :content="createUserName"></mp-toast>
   </div>
 </template>
 
 <script>
-import mpToast from 'mpvue-weui/src/toast'
 import { formatTime } from '../../utils'
 
 export default {
@@ -29,14 +27,10 @@ export default {
       default: 'edit'
     }
   },
-  components: {
-    mpToast
-  },
   data () {
     return {
       showConfig: false,
-      formatCreateTime: '',
-      showToast: false
+      formatCreateTime: ''
     }
   },
   mounted () {
@@ -47,6 +41,13 @@ export default {
     toListConfig () {
       wx.navigateTo({
         url: '../list_config/main?editType=' + this.editType
+      })
+    },
+    // 展示创建者
+    showCreateUserName () {
+      wx.showToast({
+        title: this.createUserName,
+        icon: 'none'
       })
     }
   }
