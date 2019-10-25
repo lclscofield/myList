@@ -9,6 +9,7 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
+    "backgroundColor": "#f1f1f1",
     "navigationBarBackgroundColor": "#70b7b7",
     "navigationBarTitleText": "小白的备忘清单",
     "navigationBarTextStyle": "white"

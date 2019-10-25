@@ -2,8 +2,8 @@
   <div class="probation">
     <image class="probation-list-img" mode="widthFix" src="/static/images/probation-list.png"></image>
     <div class="probation-desc">自律的人更自由！</div>
-    <button class="btn" type="default" size="large" @click="toListEdit">创建清单</button>
-    <button class="btn btn-login" type="primary" size="large" lang="zh_CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
+    <button class="btn btn-width" type="default" size="large" @click="toListEdit">创建清单</button>
+    <button class="btn btn-width btn-login" type="primary" size="large" lang="zh_CN" open-type="getUserInfo" @getuserinfo="loginHandler">登录</button>
   </div>
 </template>
 
@@ -85,7 +85,7 @@ export default {
     margin-bottom: 60rpx;
   }
 
-  > .btn {
+  > .btn-width {
     width: 600rpx;
 
     &.btn-login {

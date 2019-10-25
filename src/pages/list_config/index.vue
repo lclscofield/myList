@@ -12,14 +12,10 @@
 </template>
 
 <script>
-import mpButton from 'mpvue-weui/src/button'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'ListConfig',
-  components: {
-    mpButton
-  },
   data () {
     return {
       editType: 'edit'

@@ -90,6 +90,7 @@ export default {
   color: #1d1d1d;
 
   > .home-header {
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
