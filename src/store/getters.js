@@ -6,6 +6,10 @@ export function getUserInfo (state) {
   return state.userInfo
 }
 
+export function getList (state) {
+  return state.listArr
+}
+
 export function getListData (state) {
   return state.listData
 }

@@ -45,8 +45,8 @@ export default {
         })
         const res = await this.login(userInfo)
         // 登录成功进入首页
+        wx.hideLoading()
         if (res) {
-          wx.hideLoading()
           wx.showToast({
             title: '登录成功'
           })
@@ -54,7 +54,6 @@ export default {
             url: '../home/main'
           })
         } else {
-          wx.hideLoading()
           wx.showToast({
             title: '登录失败，请重试',
             icon: 'none'

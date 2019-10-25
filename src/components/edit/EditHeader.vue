@@ -58,8 +58,10 @@ export default {
 .edit-header {
   display: flex;
   align-items: center;
-  border-bottom: 2rpx solid #b7c5c5;
-  padding: 40rpx 40rpx 20rpx;
+  box-sizing: border-box;
+  height: 100rpx;
+  border-bottom: 2rpx solid #d8d8d8;
+  padding: 0 40rpx;
   font-size: 32rpx;
   color: #1d1d1d;
 
