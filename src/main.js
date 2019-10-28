@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import '../static/css/global.scss'
-import '../static/css/weui.wxss'
+import '../static/css/weui.scss'
 import '../static/iconfont/iconfont.css'
 
 Vue.prototype.$store = store

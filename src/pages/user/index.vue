@@ -5,15 +5,15 @@
       <div class="user-name">{{ userInfo.nickName }}</div>
     </div>
 
-    <div class="user-other">
-      <button class="weui-cell weui-cell_access" open-type="feedback">
-        <div class="weui-cell__bd">反馈建议</div>
-        <!-- <i class="iconfont icon-other"></i> -->
-      </button>
-      <button class="weui-cell weui-cell_access" open-type="feedback">
-        <div class="weui-cell__bd">反馈建议2</div>
-        <!-- <i class="iconfont icon-other"></i> -->
-      </button>
+    <div class="weui-cells">
+      <div class="weui-cell">
+        <button open-type="feedback">
+          <div class="weui-cell__bd">
+            <div class="weui-cell__title">反馈建议</div>
+            <i class="iconfont icon-enter"></i>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -41,8 +41,19 @@ export default {
     display: flex;
     align-items: center;
     background-color: #fff;
-    border-bottom: 2rpx solid #d8d8d8;
     margin-bottom: 20rpx;
+    position: relative;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2rpx;
+      color: rgba(0, 0, 0, 0.1);
+      bottom: 0;
+      border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+    }
 
     > .user-avatar {
       width: 120rpx;
@@ -53,22 +64,6 @@ export default {
     > .user-name {
       font-size: 40rpx;
       margin-left: 60rpx;
-    }
-  }
-
-  > .user-other {
-    > button {
-      box-sizing: initial;
-      font-size: initial;
-      text-align: initial;
-      text-decoration: initial;
-      line-height: initial;
-      border-radius: initial;
-
-      &::before,
-      &::after {
-        content: none;
-      }
     }
   }
 }
